@@ -1,0 +1,24 @@
+# /etc/systemd/system/nextcloud.service
+[Unit]
+Description=nextcloud uwsgi service
+After=network.target redis.service
+Before=nginx.service
+
+[Service]
+Type=notify
+User=nextcloud
+Group=nextcloud
+WorkingDirectory=/home/nextcloud/
+ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+Restart=always
+KillSignal=SIGQUIT
+NoNewPrivileges=yes
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
+Also=nextcloud.socket

@@ -1,0 +1,11 @@
+# /etc/systemd/system/nextcloud.socket
+[Unit]
+Description=nextcloud socket
+
+[Socket]
+ListenStream=/run/nextcloud.sock
+SocketMode=0660
+SocketGroup=www-data
+
+[Install]
+WantedBy=sockets.target
