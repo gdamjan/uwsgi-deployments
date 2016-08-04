@@ -1,0 +1,6 @@
+# ~/.local/etc/cgitrc
+branch-sort=age
+enable-commit-graph=1
+enable-index-links=1
+enable-git-config=1
+scan-path=.
