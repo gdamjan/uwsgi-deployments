@@ -23,8 +23,8 @@ avoiding the possibility of exploits in the app to plant malicious code
 Each application runs as it's own uwsgi process (and its own systemd service),
 typically with its own user, resources, limits, and configuration.
 
-Most of the examples can also run standalone with just uwsgis http server for
-testing.
+Most of the examples can also run standalone with just the uwsgi http server for
+testing. To run the nginx setup, you need to run `uwsgi --ini uwsgi.ini:nginx`.
 
 For php applications I've tried to limit the execution of php scripts to just
 the minimal set, sometimes using the `php-app` to just run a single php script
@@ -64,7 +64,7 @@ to only run after the redis and database service, but before the nginx service.
 uwsgi supports the systemd socket activation protocol (see the nextcloud
 example) which has several benefits. It makes it easier to setup the
 permissions for the unix domain socket file, thus the application doesn't need any special
-permissions or group setup. Also combined with uwsgis options `die-on-idle` and
+permissions or group setup. Also combined with the uwsgi options `die-on-idle = true` and
 `idle = 600` you can make the apps only run when needed and shutdown when not
 used.
 
