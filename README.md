@@ -61,6 +61,7 @@ similar options too.
 systemd also controls ordering of services, so I can configure an application
 to only run after the redis and database service, but before the nginx service.
 
+
 ## socket activation
 
 uwsgi supports the systemd socket activation protocol (see the nextcloud
@@ -83,6 +84,7 @@ applications since some php extensions are not thread-safe and they crash, but
 can be used for python apps. Look up `harakiri` too, it'll make sure your
 application is not stuck.
 
+
 ## logging
 
 Most often I just leave uwsgi do the logging to stdout/stderr. Since each
@@ -98,4 +100,12 @@ log-slow = true
 log-5xx = true
 log-4xx = true
 log-sendfile = true
+```
+
+A more advanced example for logging to logstash via a tcp socket:
+```
+plugin      =  msgpack
+logger      =  logstash socket:logstash.example.com:1717
+log-encoder =  msgpack:logstash map:4|str:message|msg|str:hostname|str:%h|str:version|str:%V|str:appname|str:%n
+log-route   =  logstash ^
 ```
