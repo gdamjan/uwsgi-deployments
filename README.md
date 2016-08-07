@@ -63,8 +63,10 @@ to only run after the redis and database service, but before the nginx service.
 
 uwsgi supports the systemd socket activation protocol (see the nextcloud
 example) which has several benefits. It makes it easier to setup the
-permissions for the unix domain socket file, thus the application doesn't need any special
-permissions or group setup. Also combined with the uwsgi options `die-on-idle = true` and
+permissions for the unix domain socket file, thus the application doesn't need 
+any special
+permissions or group setup. Also combined with the uwsgi options `die-on-idle = 
+true` and
 `idle = 600` you can make the apps only run when needed and shutdown when not
 used.
 
@@ -72,9 +74,28 @@ used.
 ## uwsgi options
 
 uwsgi has a lot of options that can tune the application, `uwsgi --help` will
-give you all of them, or check the [documentation page](http://uwsgi-docs.readthedocs.io/en/latest/Options.html).
-Some of the  more  interesting are `processes`, `offload-threads`, `cheaper` (adaptive process spawning),
+give you all of them, or check the [documentation 
+page](http://uwsgi-docs.readthedocs.io/en/latest/Options.html).
+Some of the  more  interesting are `processes`, `offload-threads`, `cheaper` 
+(adaptive process spawning),
 logging plugins, etc. The `threads` option is not recommended for php
 applications since some php extensions are not thread-safe and they crash, but
 can be used for python apps. Look up `harakiri` too, it'll make sure your
 application is not stuck.
+
+## logging
+
+Most often I just leave uwsgi do the logging to stdout/stderr. Since each 
+application is its own systemd service that goes nicely stored in the systemd 
+journal. uwsgi does support logging plugins and formats, including sending 
+msgpack formated packets via a socket to for example logstash. As always, see 
+the [documentation](http://uwsgi-docs.readthedocs.io/en/latest/Logging.html).
+
+Sometimes when debugging, I add the following options to uwsgi, which 
+counter-intuitively does less logging:
+```
+log-slow = true
+log-5xx = true
+log-4xx = true
+log-sendfile = true
+```
