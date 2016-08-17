@@ -29,7 +29,7 @@ testing. To run the nginx setup, you need to run `uwsgi --ini uwsgi.ini:nginx`.
 For php applications I've tried to limit the execution of php scripts to just
 the minimal set, sometimes using the `php-app` to just run a single php script
 which works best with Symphony based applications (see drupal and wallabag).
-Especially directories that contain user uploaded files shoud not allow php
+Especially directories that contain user uploaded files should not allow php
 execution.
 
 One neat example is the hatta wiki, which uses the same .ini file to configure
@@ -90,7 +90,7 @@ application is not stuck.
 Most often I just leave uwsgi do the logging to stdout/stderr. Since each
 application is its own systemd service that goes nicely stored in the systemd
 journal. uwsgi does support logging plugins and formats, including sending
-msgpack formated packets via a socket to for example logstash. As always, see
+msgpack formatted packets via a socket to for example logstash. As always, see
 the [documentation](http://uwsgi-docs.readthedocs.io/en/latest/Logging.html).
 
 Sometimes when debugging, I add the following options to uwsgi, which

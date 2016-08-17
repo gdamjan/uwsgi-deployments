@@ -1,4 +1,4 @@
-mediawiki is unpacked in `/usr/share/webapps/mediawiki`. Other than that you don't touch or modofy that directory.
+mediawiki is unpacked in `/usr/share/webapps/mediawiki`. Other than that you don't touch or modify that directory.
 
 Uploads go to `/var/lib/mediawiki/images` - if you change that, change `$wgUploadDirectory` in `LocalSettings.php` and
 the alias for `/images` in nginx.
