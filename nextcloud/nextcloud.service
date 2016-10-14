@@ -3,6 +3,7 @@
 Description=nextcloud uwsgi service
 After=network.target redis.service
 Before=nginx.service
+Requires=nextcloud.service
 
 [Service]
 Type=notify
