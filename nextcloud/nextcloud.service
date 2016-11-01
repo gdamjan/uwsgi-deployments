@@ -9,7 +9,7 @@ Requires=nextcloud.service
 Type=notify
 User=nextcloud
 Group=nextcloud
-WorkingDirectory=/home/nextcloud/
+Environment=NEXTCLOUD_CONFIG_DIR=/etc/nextcloud/
 ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStop=/bin/kill -INT $MAINPID
