@@ -15,3 +15,7 @@ $wgArticlePath = "/$1";
 $wgUploadDirectory = "/var/lib/mediawiki/images";
 $wgSQLiteDataDir = "/var/lib/mediawiki/data";
 ```
+
+## Updates
+
+Run `echo | php -B 'define("MW_CONFIG_FILE","/etc/mediawiki/LocalSettings.php");' -F /usr/share/webapps/mediawiki/maintenance/update.php`.
