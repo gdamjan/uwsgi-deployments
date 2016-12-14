@@ -20,7 +20,8 @@ PrivateDevices=yes
 PrivateTmp=yes
 ProtectSystem=full
 MountFlags=private
-#ExecStartPost=+/usr/bin/nsenter -t $MAINPID -m /bin/mount --bind /some/aditional/path /home/nextcloud/data/user/files/xxx
+#ExecStartPost=+/usr/bin/nsenter -t $MAINPID -m /bin/mount --bind /some/aditional/path /home/nextcloud/data/user/files/xyz
+#BindReadOnlyPaths=/some/aditional/path:/home/nextcloud/data/user/files/xyz
 
 [Install]
 WantedBy=multi-user.target
