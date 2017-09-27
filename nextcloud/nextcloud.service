@@ -10,7 +10,9 @@ Type=notify
 User=nextcloud
 Group=nextcloud
 Environment=NEXTCLOUD_CONFIG_DIR=/etc/nextcloud/
+ExecStartPre=/usr/bin/php /usr/share/webapps/nextcloud/occ upgrade
 ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx
+ExecReload=/usr/bin/php /usr/share/webapps/nextcloud/occ files:scan --all
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStop=/bin/kill -INT $MAINPID
 Restart=always
