@@ -9,15 +9,18 @@ Requires=nextcloud.socket
 Type=notify
 User=nextcloud
 Group=nextcloud
+RuntimeDirectory=nextcloud
+
 Environment=NEXTCLOUD_CONFIG_DIR=/etc/nextcloud/
 ExecStartPre=/usr/bin/php /usr/share/webapps/nextcloud/occ upgrade
-ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx
-ExecStop=/bin/kill -INT $MAINPID
+ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx --master-fifo /run/nextcloud/master-fifo --die-on-term
+
 ExecReload=/usr/bin/php /usr/share/webapps/nextcloud/occ files:scan --all
-ExecReload=/bin/kill -HUP $MAINPID
+ExecReload=/bin/bash -c 'echo w > /run/nextcloud/master-fifo'
+ExecStop=/bin/bash -c 'echo q > /run/nextcloud/master-fifo'
+
 TimeoutSec=infinity
 Restart=always
-KillSignal=SIGQUIT
 NoNewPrivileges=yes
 PrivateDevices=yes
 PrivateTmp=yes
