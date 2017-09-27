@@ -13,7 +13,7 @@ RuntimeDirectory=nextcloud
 
 Environment=NEXTCLOUD_CONFIG_DIR=/etc/nextcloud/
 ExecStartPre=/usr/bin/php /usr/share/webapps/nextcloud/occ upgrade
-ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx --master-fifo /run/nextcloud/master-fifo --die-on-term
+ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/nextcloud.ini:nginx --master-fifo /run/nextcloud/master-fifo --die-on-term --logger systemd
 
 ExecReload=/usr/bin/php /usr/share/webapps/nextcloud/occ files:scan --all
 ExecReload=/bin/bash -c 'echo w > /run/nextcloud/master-fifo'
