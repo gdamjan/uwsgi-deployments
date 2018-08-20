@@ -1,0 +1,16 @@
+# /etc/systemd/system/hatta.service
+[Unit]
+Description=hatta wiki uwsgi service
+After=network.target hatta.socket
+Requires=hatta.socket
+
+[Service]
+Type=notify
+DynamicUser=yes
+StateDirectory=hatta
+ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/hatta.ini:service
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+Also=hatta.socket

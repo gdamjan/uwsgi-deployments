@@ -1,0 +1,11 @@
+# /etc/systemd/system/hatta.socket
+[Unit]
+Description=hatta wiki socket
+
+[Socket]
+ListenStream=/run/hatta.sock
+SocketMode=0660
+SocketGroup=www-data
+
+[Install]
+WantedBy=sockets.target
