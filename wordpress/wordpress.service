@@ -12,6 +12,7 @@ RuntimeDirectory=wordpress
 StateDirectory=wordpress
 LogsDirectory=wordpress
 WorkingDirectory=/var/lib/wordpress/
+Environment=WP_CONTENT_DIR=/var/lib/wordpress
 ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/wordpress.ini:service --master-fifo /run/wordpress/master-fifo
 ExecReload=/bin/bash -c 'echo w > /run/wordpress/master-fifo'
 ExecStop=/bin/bash -c 'echo q > /run/wordpress/master-fifo'
