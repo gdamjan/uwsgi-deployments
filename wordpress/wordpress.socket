@@ -1,0 +1,10 @@
+[Unit]
+Description=wordpress socket
+
+[Socket]
+ListenStream=/run/uwsgi/wordpress.sock
+SocketMode=0660
+SocketGroup=http
+
+[Install]
+WantedBy=sockets.target
